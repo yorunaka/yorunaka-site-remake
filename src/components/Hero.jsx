@@ -1,10 +1,43 @@
 import React from 'react'
+import { motion, AnimatePresence } from "motion/react"
+import { useState, useEffect } from 'react'
 import logo from '../assets/logo.gif'
 
 const Hero = () => {
+  const text = ["Front End Web Developer", "Graphic Designer", "AI Enthusiast"]
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [displayedText, setDisplayedText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    let typingSpeed = 100
+    let deletingSpeed = 50
+    let timeout
+
+    const currentText = text[currentIndex]
+
+    if (isDeleting){
+      timeout = setTimeout(() => {
+        setDisplayedText((prev) => prev.slice(0, prev.length - 1))
+      }, deletingSpeed)
+    } else {
+      timeout = setTimeout(() => {
+        setDisplayedText((prev) => currentText.slice(0, prev.length + 1))
+      }, typingSpeed)
+    }
+    
+    if (!isDeleting && displayedText === currentText){
+      timeout = setTimeout(() => setIsDeleting(true), 2000)
+    } else if (isDeleting && displayedText === ''){
+      setIsDeleting(false)
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % text.length)
+    }
+    
+  }, [displayedText, isDeleting, currentIndex, text])
+
   return (
     <div>
-     <section id="home" className="pt-20 ">
+     <section id="home" className="pt-20 w-full">
         <div className="container ">
           <div className="flex flex-wrap">
             <div className="w-full self-center px-4 lg:w-1/2 lg:pl-56 lg:pt-24">
@@ -16,13 +49,30 @@ const Hero = () => {
                     here.
                   </span>
                 </span>
-                A.K.A 
-                <span className="block text-3xl font-medium lg:text-5xl">
-                  Yorunaka
-                </span>
               </h1>
               <p className="leading-relaxed font-normal lg:text-lg">
-                {`I'm a front-end web developer who also interested in AI stuff and graphics design.`}
+                {`I'm a `}
+                  <motion.span 
+                  initial={{opacity:0}}
+                  animate={{opacity:1}}
+                  transition={{
+                    duration:0.25
+                  }}
+                  key={currentIndex}
+                  >
+                  {displayedText}
+                  </motion.span>
+                  <motion.span
+                  className='font-bold'
+                  animate={{opacity:[1,0]}}
+                  transition={{
+                    duration: 0.9,
+                    repeat: Infinity
+                  }}
+                  >
+                    |
+                  </motion.span>
+                who has a great vision about future.
               </p>
               <p className="block font-normal mb-5 lg:text-lg">Coding 4 Fun!</p>
               <p />
@@ -33,18 +83,24 @@ const Hero = () => {
                 Contact Me
               </a>
             </div>
-            <div className="w-full self-end relative lg:w-1/2">
-              <div className="absolute bottom-0 -z-10 left-1/2 -translate-x-3/4 opacity-30 md:scale-75 md:-translate-x-3/4 md:translate-y-[100px] lg:opacity-100 lg:-z-10 lg:-translate-x-[200px] lg:translate-y-[75px]">
-                <img
-                  src={logo}
-                  alt="logo"
-                  className="max-w-full lg:scale-175"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </section>
+      <div className='pt-20 w-full'>
+        <div className='bg-yellow-300 text-black'>
+            <AnimatePresence mode='wait'>
+              <motion.div
+              key={currentIndex}
+              initial={{ x:'100%'}}
+              animate={{ x:'0%'}}
+              exit={{ x:'-100%'}}
+              transition={{duration: 0.5}}
+              >
+                {text}
+              </motion.div>
+            </AnimatePresence>
+        </div>
+      </div>
     </div>
   )
 }
