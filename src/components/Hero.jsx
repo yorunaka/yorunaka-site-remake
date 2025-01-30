@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import logo from '../assets/logo.gif'
 
 const Hero = () => {
-  const text = ["Front End Web Developer", "Graphic Designer", "AI Enthusiast"]
+  const text = ["Front End Web Developer", "Graphic Designer", "AI Enthusiast", "Wutdeheel"]
   const [currentIndex, setCurrentIndex] = useState(0)
   const [displayedText, setDisplayedText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
@@ -12,22 +12,21 @@ const Hero = () => {
   useEffect(() => {
     let typingSpeed = 100
     let deletingSpeed = 50
-    let timeout
-
+    
     const currentText = text[currentIndex]
 
     if (isDeleting){
-      timeout = setTimeout(() => {
+        setTimeout(() => {
         setDisplayedText((prev) => prev.slice(0, prev.length - 1))
       }, deletingSpeed)
     } else {
-      timeout = setTimeout(() => {
+        setTimeout(() => {
         setDisplayedText((prev) => currentText.slice(0, prev.length + 1))
       }, typingSpeed)
     }
     
     if (!isDeleting && displayedText === currentText){
-      timeout = setTimeout(() => setIsDeleting(true), 2000)
+        setTimeout(() => setIsDeleting(true), 2000)
     } else if (isDeleting && displayedText === ''){
       setIsDeleting(false)
       setCurrentIndex((prevIndex) => (prevIndex + 1) % text.length)
@@ -78,7 +77,7 @@ const Hero = () => {
               <p />
               <a
                 href="mailto:vincentfernando.work@gmail.com"
-                className="font-semibold text-base bg-sky-400 text-white px-6 py-3 rounded-xl hover:bg-sky-600 hover:text-sky-200 transition ease-in-out duration-300 delay-100"
+                className="font-semibold px-3 py-2 text-sm rounded-md lg:text-base bg-sky-400 text-white lg:px-6 lg:py-3 lg:rounded-xl hover:bg-sky-600 hover:text-sky-200 transition ease-in-out duration-300 delay-100"
               >
                 Contact Me
               </a>
