@@ -6,7 +6,7 @@ const About = () => {
 
   return (
     <section id="about" class="pt-16 lg:pt-32 pb-16">
-    <div class="container">
+    <div class="">
         <div class="w-full flex flex-wrap md:gap-2 md:flex-nowrap">
             <div class="self-center md:w-auto md:self-start lg:mt-16 lg:w-1/2 lg:self-start">
                 <img src={portrait}alt="portrait" class="mx-auto sm:max-w-xs md:max-w-md lg:max-w-lg">

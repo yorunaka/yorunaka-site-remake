@@ -5,7 +5,7 @@ import About from './components/About'
 import Footer from './components/Footer'
 import Skills from './components/Skills'
 import Project from './components/Projects'
-import { techstack } from './components/techstack.js'
+
 function App() {
 
   return (
@@ -13,7 +13,7 @@ function App() {
         <Header />
         <Hero />
         <About />
-        <Skills techstack={techstack}/>
+        <Skills />
         <Project />
         <Footer />
     </div>
