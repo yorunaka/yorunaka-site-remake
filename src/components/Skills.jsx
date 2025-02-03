@@ -25,7 +25,7 @@ const Skills = () => {
           >
             {
                 techstack.concat(techstack).map(({id, name, img}, index) => (
-                  <div className='bg-white w-fit rounded-lg lg:px-8 lg:py-8 
+                  <div className='bg-white w-fit shadow-md shadow-slate-300 rounded-lg lg:px-8 lg:py-8 
                   hover:scale-105 hover:transition hover:delay-50 
                   hover:rounded-lg hover:ease-in-out' key={`${index} - ${id}`}>
                     <img src={img} alt={name} className='w-10 h-10 lg:w-full lg:h-auto'/>

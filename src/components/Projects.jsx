@@ -13,7 +13,7 @@ const Project = () => {
           <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>  
             {
             projects.map(({name, type, desc, linkToProject, linkToWebsite}, index)=> (
-            <div className='grid grid-flow-row bg-white rounded-md p-4 pb-2' key={index}>
+            <div className='grid grid-flow-row bg-white rounded-md p-4 pb-2 shadow-lg shadow-slate-300 lg:hover:scale-105 lg:hover:transition lg:hover:delay-50' key={index}>
               <div className='text-xl font-bold'>
                 {name}
               </div>
