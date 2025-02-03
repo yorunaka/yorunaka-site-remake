@@ -15,7 +15,7 @@ const Skills = () => {
         <div id='carousel' className='pt-8 pb-8 overflow-hidden'>
           <motion.div
           className='px-4 flex gap-4'
-          initial={{x: '50%'}}
+          initial={{x: '90%'}}
           animate={{x: '-100%'}}
           transition={{
             ease: 'linear',
@@ -25,8 +25,10 @@ const Skills = () => {
           >
             {
                 techstack.concat(techstack).map(({id, name, img}, index) => (
-                  <div className='bg-white w-full px-8 py-8 lg:px-8 lg:py-8 rounded-lg hover:scale-105 hover:transition hover:delay-50 hover:rounded-lg hover:ease-in-out' key={`${index}`}>
-                    <img src={img} alt={name} className='w-full h-auto'/>
+                  <div className='bg-white w-fit rounded-lg lg:px-8 lg:py-8 
+                  hover:scale-105 hover:transition hover:delay-50 
+                  hover:rounded-lg hover:ease-in-out' key={`${index} - ${id}`}>
+                    <img src={img} alt={name} className='w-10 h-10 lg:w-full lg:h-auto'/>
                   </div>    
                 ))
             }
