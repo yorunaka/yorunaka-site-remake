@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import techstack from '../assets/stackData'
+import webDev from '../assets/stackData'
 import { motion, useAnimation } from 'motion/react'
  
 const Skills = () => {
@@ -19,12 +19,12 @@ const Skills = () => {
           animate={{x: '-100%'}}
           transition={{
             ease: 'linear',
-            duration: techstack.length * 7,
+            duration: webDev.length * 7,
             repeat: Infinity,
           }}
           >
             {
-                techstack.concat(techstack).map(({id, name, img}, index) => (
+                webDev.concat(webDev).map(({id, name, img}, index) => (
                   <div className='bg-white w-fit shadow-md shadow-slate-300 rounded-lg lg:px-8 lg:py-8 
                   hover:scale-105 hover:transition hover:delay-50 
                   hover:rounded-lg hover:ease-in-out' key={`${index} - ${id}`}>
