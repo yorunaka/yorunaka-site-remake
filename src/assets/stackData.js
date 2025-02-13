@@ -1,4 +1,4 @@
-  const webDev = [
+export  const webDev = [
     {
       id: '1',
       name: 'HTML',
@@ -34,10 +34,24 @@
       name: 'MySQL',
       img: 'https://img.icons8.com/color/48/mysql-logo.png',
       desc: 'react'
+    },    
+      
+    ]
+    
+export  const graphicDes = [
+    {
+      id: '1',
+      name: 'Photoshop',
+      img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg",
+      desc: 'react'
     },
-  
-  ]
+    {
+      id: '1',
+      name: 'Canva',
+      img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg",
+      desc: 'react'
+    },
+]
 
 
 
-export default webDev;
