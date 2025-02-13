@@ -1,10 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { webDev, graphicDes } from '../assets/stackData'
+import {webDev, graphicDes} from '../assets/stackData'
 import { motion, useAnimation } from 'motion/react'
  
 const Skills = () => {
-  const [currentIndex, setCurrentIndex] = useState(0)
   
   return (
     <section id='skills' className='w-full self-center px-4 py-auto h-full'>
@@ -16,10 +15,11 @@ const Skills = () => {
           <div className='carousel-item w-full grid grid-flow-col justify-center gap-4' id='item1'>
           {
             webDev.map(({img,name}, id) => (
-                <div className='bg-white w-fit shadow-md shadow-slate-300 rounded-lg lg:px-8 lg:py-8 
+                <div className='bg-white w-full px-2 py-auto shadow-md shadow-slate-300 rounded-lg lg:px-8 lg:py-8 
                 hover:scale-105 hover:transition hover:delay-50 
                 hover:rounded-lg hover:ease-in-out' key={`${id}`}>
-                  <img src={img} alt={name} className='w-10 h-10 lg:w-full lg:h-20'/>
+                  <img src={img} alt={name} className='w-10 h-10 m-2 mx-auto lg:m-0 lg:w-full lg:h-20'/>
+                  <h1 className='text-center hidden font-semibold pt-2 lg:block'>{name}</h1>
                 </div>
             ))
           }
@@ -27,20 +27,23 @@ const Skills = () => {
           <div className='carousel-item w-full grid grid-flow-col justify-center gap-4' id='item2'>
           {
             graphicDes.map(({img,name}, id) => (
-                <div className='bg-white w-fit shadow-md shadow-slate-300 rounded-lg lg:px-8 lg:py-8 
-                hover:scale-105 hover:transition hover:delay-50 
-                hover:rounded-lg hover:ease-in-out' key={`${id}`}>
-                  <img src={img} alt={name} className='w-10 h-10  lg:h-20 lg:w-full'/>
-                </div>
+              <div className='bg-white w-full px-2 py-auto shadow-md shadow-slate-300 rounded-lg lg:px-8 lg:py-8 
+              hover:scale-105 hover:transition hover:delay-50 
+              hover:rounded-lg hover:ease-in-out' key={`${id}`}>
+                <img src={img} alt={name} className='w-10 h-10 m-2 mx-auto lg:m-0 lg:w-full lg:h-20'/>
+                <h1 className='text-center hidden font-semibold pt-2 lg:block'>{name}</h1>
+              </div>
             ))
           }
           </div>
         </div>
           <div className="flex w-full justify-center gap-2 py-2">
-            <a href="#item1" className="btn btn-md">1</a>
-            <a href="#item2" className="btn btn-md">2</a>
-            <a href="#item3" className="btn btn-md">3</a>
-            <a href="#item4" className="btn btn-md">4</a>
+              <div className="left-5 right-5 top-1/2 flex gap-2 -translate-y-1/2 transform justify-between">
+                <a href="#item1" className="btn btn-circle">❮</a>
+                <a href="#item1" className="btn btn-md">1</a>
+                <a href="#item2" className="btn btn-md">2</a>
+                <a href="#item2" className="btn btn-circle">❯</a>
+              </div>  
           </div>
     </section>
   )
