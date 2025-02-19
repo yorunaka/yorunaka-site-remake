@@ -8,7 +8,7 @@ const About = () => {
     <section id="about" className="pt-16 lg:pt-32 pb-16">
     <div className="">
         <div className="w-full flex flex-wrap md:gap-2 md:flex-nowrap">
-            <div className="self-center md:w-auto md:self-start lg:mt-16 lg:w-1/2 lg:self-start">
+            <div className="self-center md:w-auto md:self-center lg:mt-16 lg:w-1/2 lg:self-start">
                 <img src={portrait}alt="portrait" className="mx-auto sm:max-w-xs md:max-w-md lg:max-w-lg">
                 </img>
             </div>

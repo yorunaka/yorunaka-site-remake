@@ -85,21 +85,6 @@ const Hero = () => {
           </div>
         </div>
       </section>
-      {/* <div className='pt-20 w-full'>
-        <div className='bg-yellow-300 text-black'>
-                <motion.span
-                initial={{ x:'100%'}}
-                animate={{ x:'-100%'}}
-                transition={{duration: 9, ease:'linear' ,repeat: Infinity}}
-                >
-              {text.map((item, id) => (
-                <span key={id}>
-                  {item}
-                </span>
-              ))}
-                </motion.span>
-        </div>
-      </div> */}
     </div>
   )
 }
