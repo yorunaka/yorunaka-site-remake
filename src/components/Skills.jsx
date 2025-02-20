@@ -12,31 +12,24 @@ const Skills = () => {
           <h1 className='text-2xl font-semibold lg:text-4xl'>Skills</h1>
           <p className='lg:text-center'>My Techstacks</p>
         </div>
-        <div id='carousel' className='carousel w-full pt-8 pb-8 overflow-hidden'>
-          <div className='carousel-item w-full grid grid-flow-col justify-center gap-4' id='item1'>
+        <div id='carousel' className='carousel w-full pt-8 pb-8 overflow-hidden'> 
           {
-            stacks.webDev.map(({img,name}, id) => (
-                <div className='bg-white w-full px-2 py-auto shadow-md shadow-slate-300 rounded-lg lg:px-8 lg:py-8 
-                hover:scale-105 hover:transition hover:delay-50 
-                hover:rounded-lg hover:ease-in-out' key={`${id}`}>
-                  <img src={img} alt={name} className='w-10 h-10 m-2 mx-auto lg:m-0 lg:w-full lg:h-20'/>
-                  <h1 className='text-center hidden font-semibold pt-2 lg:block'>{name}</h1>
-                </div>
-            ))
-          }
-          </div>
-          <div className='carousel-item w-full grid grid-flow-col justify-center gap-4' id='item2'>
-          {
-            stacks.graphicDes.map(({img,name}, id) => (
-              <div className='bg-white w-full px-2 py-auto shadow-md shadow-slate-300 rounded-lg lg:px-8 lg:py-8 
-              hover:scale-105 hover:transition hover:delay-50 
-              hover:rounded-lg hover:ease-in-out' key={`${id}`}>
-                <img src={img} alt={name} className='w-10 h-10 m-2 mx-auto lg:m-0 lg:w-full lg:h-20'/>
-                <h1 className='text-center hidden font-semibold pt-2 lg:block'>{name}</h1>
+            stacks.map((category, i) => (
+              <div className='carousel-item w-full grid grid-flow-col justify-center gap-4' id={`item${i+1}`} key={i}>
+                {
+                  category.tech.map((item, id) => (
+                      <div className='bg-white w-full px-2 py-auto shadow-md shadow-slate-300 rounded-lg lg:px-8 lg:py-8 
+                      hover:scale-105 hover:transition hover:delay-50 
+                      hover:rounded-lg hover:ease-in-out' key={`${id}`}>
+                        <img src={item.img} alt={item.name} className='w-10 h-10 m-2 mx-auto lg:m-0 lg:w-full lg:h-20'/>
+                        <h1 className='text-center hidden font-semibold pt-2 lg:block'>{item.name}</h1>
+                      </div>
+                    ))
+                }
               </div>
-            ))
+                ))
+
           }
-          </div>
         </div>
           <div className="flex w-full justify-center gap-2 py-2">
               <div className="left-5 right-5 top-1/2 flex gap-2 -translate-y-1/2 transform justify-between">

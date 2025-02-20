@@ -1,5 +1,7 @@
-const stacks = {
-  webDev : [
+const stacks = [
+{
+  category: 'Web Development', 
+  tech : [
     {
       name: 'HTML',
       img: "https://img.icons8.com/color/html-5--v1.png",
@@ -32,8 +34,10 @@ const stacks = {
     },    
       
     ],
-    
-  graphicDes : [
+},
+{   
+  category : 'Graphic Design', 
+  tech : [
     {
       name: 'Photoshop',
       img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg",
@@ -45,7 +49,8 @@ const stacks = {
       desc: 'react'
     },
   ],
-}  
+},
+]
 
 export default stacks
 
