@@ -1,74 +1,69 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 const Chatbot = () => {
+  const [userMessage, setUserMessage] = useState('')
+  const [chatHistory, setChatHistory] = useState([])
+  
+  const getUserMessage = (value) => {
+    setUserMessage(value)
+  } 
+  
+  const handleSendMessage = (e) => {
+    if(userMessage.trim === '') return 
+
+    const newMessage = { sender: 'You', text: userMessage }
+    const updatedChat = [...chatHistory, newMessage]
+
+    setChatHistory(updatedChat);
+    localStorage.setItem('chatHistory', JSON.stringify(updatedChat))
+
+    setUserMessage('')
+  }
+
+  const getUserMessageFromStorage = () => {
+    let a = localStorage.getItem('userMessage')
+    
+    return a
+  }
+  
+  // debugger
+  useEffect(() => {
+    const storedMessages = JSON.parse(localStorage.getItem('chatHistory')) || []
+    setChatHistory(storedMessages)
+}, [])  
+
   return (
     <div className='h-screen flex flex-col place-content-between'>
         <div className='p-4'>
             <div className='mockup-window rounded-md w-full h-full bg-white p-8'>
-            <div className="chat chat-start">
+                {chatHistory.map((msg, index) => (
+                <div key={index} className={`chat ${msg.sender === "You" ? "chat-end" : "chat-start"}`}>
                 <div className="chat-image avatar">
                     <div className="w-10 rounded-full">
                     <img
-                        alt="Tailwind CSS chat bubble component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                        alt="Chat Avatar"
+                        src={msg.avatar || "https://img.icons8.com/ios-filled/50/user.png"}
+                    />
                     </div>
                 </div>
-                <div className="chat-bubble">It was said that you would, destroy the Sith, not join them.</div>
+                <div className="chat-bubble bg-blue-500 text-white">{msg.text}</div>
                 </div>
-                <div className="chat chat-start">
-                <div className="chat-image avatar">
-                    <div className="w-10 rounded-full">
-                    <img
-                        alt="Tailwind CSS chat bubble component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                    </div>
-                </div>
-                <div className="chat-bubble">It was you who would bring balance to the Force</div>
-                </div>
-                <div className="chat chat-start">
-                <div className="chat-image avatar">
-                    <div className="w-10 rounded-full">
-                    <img
-                        alt="Tailwind CSS chat bubble component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                    </div>
-                </div>
-                <div className="chat-bubble">Not leave it in Darkness</div>
-                </div>
-                <div className="chat chat-end">
-                    <div className="chat-image avatar">
-                        <div className="w-10 rounded-full">
-                        <img
-                            alt="Tailwind CSS chat bubble component"
-                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                        </div>
-                    </div>
-                    <div className="chat-bubble">It was said that you would, destroy the Sith, not join them.</div>
-                    </div>
-                    <div className="chat chat-end">
-                    <div className="chat-image avatar">
-                        <div className="w-10 rounded-full">
-                        <img
-                            alt="Tailwind CSS chat bubble component"
-                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                        </div>
-                    </div>
-                    <div className="chat-bubble">It was you who would bring balance to the Force</div>
-                    </div>
-                    <div className="chat chat-end">
-                    <div className="chat-image avatar">
-                        <div className="w-10 rounded-full">
-                        <img
-                            alt="Tailwind CSS chat bubble component"
-                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                        </div>
-                    </div>
-                    <div className="chat-bubble">Not leave it in Darkness</div>
-                </div>
+            ))}
                 <div className='pt-8'>
-                    <input type="text" placeholder='masukkan teks anda' className='input w-full' id="" />
+                    <div className='flex flex-row'>
+                        <input type="text" placeholder='Masukkan teks anda' className='input w-full rounded-l-md' id="" 
+                        onChange={(e) => {
+                            getUserMessage(e.target.value)
+                        }}
+                        value={userMessage}
+                        />
+                        <button className='bg-blue-300 rounded-r-md hover:bg-blue-500 hover:cursor-pointer hover:transition hover:delay-75'
+                        onClick={handleSendMessage}>
+                            <img className='w-10 h-10 p-1' src="https://img.icons8.com/ios/50/sent--v1.png" alt="sent--v1"/>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
