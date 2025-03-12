@@ -26,14 +26,14 @@ const Project = () => {
               </div>
               <div className='flex gap-4'>
                 <a href={linkToProject}>
-                  <div className='p-2 rounded-sm hover:transition hover:ease-in-out hover:bg-sky-300 text-blue-500 hover:text-blue-700'>
+                  <div className='p-2 rounded-xs hover:transition hover:ease-in-out hover:bg-sky-300 text-blue-500 hover:text-blue-700'>
                     View Project
                   </div>
                 </a>
                 <div>
                   {linkToWebsite && (
                     <a href={linkToWebsite}>
-                      <div className='p-2 rounded-sm hover:transition hover:ease-in-out hover:bg-sky-300 text-blue-500 hover:text-blue-700'>
+                      <div className='p-2 rounded-xs hover:transition hover:ease-in-out hover:bg-sky-300 text-blue-500 hover:text-blue-700'>
                         View Live
                       </div>
                     </a>
