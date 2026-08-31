@@ -3,6 +3,7 @@ import React from "react";
 
 const Chatbot = () => {
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [messages, setMessages] = useState([
     {
@@ -12,23 +13,74 @@ const Chatbot = () => {
     },
   ]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!message.trim()) return;
+    if (!message.trim() || isLoading) return;
 
-    const newMessage = {
-      role: "user",
-      content: message,
-    };
+    const userMessage = message;
 
-    setMessages((prev) => [...prev, newMessage]);
+    setMessages((prev) => [
+        ...prev,
+        {
+        role: "user",
+        content: userMessage,
+        },
+    ]);
 
     setMessage("");
-  };
+    setIsLoading(true);
+
+    try {
+
+        const response = await fetch("/api/chat", {
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+            message: userMessage,
+        }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+        throw new Error(data.error);
+        }
+
+        setMessages((prev) => [
+        ...prev,
+        {
+            role: "assistant",
+            content: data.answer,
+        },
+        ]);
+
+    } catch (error) {
+
+        console.error(error);
+
+        setMessages((prev) => [
+        ...prev,
+        {
+            role: "assistant",
+            content:
+            "Sorry, something went wrong. Please try again.",
+        },
+        ]);
+
+    } finally {
+
+        setIsLoading(false);
+
+    }
+    };
 
   return (
-    <div className="w-full max-w-3xl h-[400px] flex flex-col overflow-hidden rounded-3xl border border-slate-200/50 bg-white/70 shadow-2xl backdrop-blur-xl">
+    <div className="w-full max-w-3xl h-[350px] flex flex-col overflow-hidden rounded-3xl border border-slate-200/50 bg-white/70 shadow-2xl backdrop-blur-xl lg:h-[400px]">
 
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-200/50 px-5 py-4">
@@ -57,7 +109,7 @@ const Chatbot = () => {
       {/* Messages */}
       <div className="flex flex-1 flex-col gap-3 overflow-y-auto p-5">
 
-        {messages.map((msg, index) => (
+        {messages.map((msg, index) => ( 
 
           <div
             key={index}
@@ -81,7 +133,29 @@ const Chatbot = () => {
           </div>
 
         ))}
+        {isLoading && (
+            <div className="flex justify-start">
+                <div className="rounded-2xl rounded-bl-md bg-slate-100 px-4 py-3">
 
+                <div className="flex gap-1">
+
+                    <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400" />
+
+                    <span
+                    className="h-2 w-2 animate-bounce rounded-full bg-slate-400"
+                    style={{ animationDelay: "150ms" }}
+                    />
+
+                    <span
+                    className="h-2 w-2 animate-bounce rounded-full bg-slate-400"
+                    style={{ animationDelay: "300ms" }}
+                    />
+
+                </div>
+
+                </div>
+            </div>
+            )}
       </div>
 
 
