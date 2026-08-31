@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion, AnimatePresence } from "motion/react"
 import { useState, useEffect } from 'react'
+import Chatbot from './Chatbot/Chatbox'
 import logo from '../assets/logo.gif'
 
 const Hero = () => {
@@ -37,9 +38,9 @@ const Hero = () => {
   return (
     <div>
      <section id="home" className="pt-20 w-full">
-        <div className="container ">
-          <div className="flex flex-wrap">
-            <div className="w-full self-center px-4 lg:w-1/2 lg:pl-56 lg:pt-24">
+        <div className="w-full">
+          <div className="flex flex-wrap justify-items-evenly">
+            <div className="w-full self-start px-4 lg:w-1/2 lg:pl-56 lg:pt-24">
               <h1 className="text-2xl lg:text-4xl">
                 Hello,
                 <span className="block text-4xl font-bold lg:text-6xl">
@@ -81,6 +82,9 @@ const Hero = () => {
               >
                 Contact Me
               </a>
+            </div>
+            <div className="grid mt-12 w-full px-4 lg:mt-0 lg:w-1/2 lg:pr-20">
+              <Chatbot />
             </div>
           </div>
         </div>
