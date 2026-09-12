@@ -29,9 +29,52 @@ import { retrieveRelevantDocuments } from "./retrieve.js";
 //   }
 // }
 
+const requests = new Map();
+
+const RATE_LIMIT = 5; // maximum requests
+const WINDOW = 60 * 1000; // 1 minute
+
+function isRateLimited(ip) {
+  const now = Date.now();
+
+  const record = requests.get(ip);
+
+  if (!record || now - record.start >= WINDOW) {
+    requests.set(ip, {
+      start: now,
+      count: 1,
+    });
+
+    return false;
+  }
+
+  if (record.count >= RATE_LIMIT) {
+    return true;
+  }
+
+  record.count++;
+
+  return false;
+}
+
 export async function onRequestPost(context) {
 
    try {
+        const ip =
+      context.request.headers.get("CF-Connecting-IP") ||
+      "unknown";
+
+    if (isRateLimited(ip)) {
+      return Response.json(
+        {
+          error:
+            "Too many requests. Please wait a minute and try again.",
+        },
+        {
+          status: 429,
+        }
+      );
+    }
     // Get request body
     const { message } = await context.request.json();
 
