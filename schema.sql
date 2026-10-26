@@ -11,7 +11,6 @@ CREATE TABLE IF NOT EXISTS posts (
   content TEXT NOT NULL,
   excerpt TEXT,
   status VARCHAR(20) CHECK (status IN ('draft', 'published')) DEFAULT 'draft',
-  views BIGINT DEFAULT 0,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

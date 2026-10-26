@@ -5,7 +5,7 @@ import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import Card from '../components/ui/Card';
 import { Lock, Plus, Trash2, Edit, ShieldCheck } from 'lucide-react';
-import { adminApi } from '../hooks/blogApi';
+import { getPost, savePost, deletePost} from '../hooks/blogApi';
 
 const INITIAL_FORM_STATE = { id: null, title: '', slug: '', excerpt: '', content: '' };
 
@@ -16,21 +16,27 @@ export default function Admin() {
   const [editingPost, setEditingPost] = useState(null);
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
 
-  const fetchAdminPosts = useCallback(async (authToken) => {
+  const fetchBlogPost = async (authToken) => {
+    if (!authToken) {
+      setIsAuthenticated(false);
+      return;
+    }
+
     try {
-      const data = await adminApi.getPosts(authToken);
+      const data = await getPost(authToken);
       setPosts(data);
       setIsAuthenticated(true);
-    } catch {
+    } catch (error) {
+      console.error("Auth check failed:", error);
       setIsAuthenticated(false);
     }
-  }, []);
+  };
 
 useEffect(() => {
     const savedToken = localStorage.getItem('admin_token');
     if (savedToken) {
       setToken(savedToken);
-      fetchAdminPosts(savedToken);
+      fetchBlogPost(savedToken);
     }
   }, []);
 
@@ -40,14 +46,14 @@ useEffect(() => {
     
     // Save to storage and immediately fetch posts using the input token
     localStorage.setItem('admin_token', token);
-    await fetchAdminPosts(token);
+    await fetchBlogPost(token);
   };
 
   const handleSave = async (status) => {
     try {
-      await adminApi.savePost(token, formData, status);
+      await savePost(token, formData, status);
       resetForm();
-      fetchAdminPosts(token);
+      fetchBlogPost(token);
     } catch (err) {
       alert(err.message);
     }
@@ -56,8 +62,8 @@ useEffect(() => {
   const handleDelete = async (id) => {
     if (!confirm('Are you sure you want to delete this post?')) return;
     try {
-      await adminApi.deletePost(token, id);
-      fetchAdminPosts(token);
+      await deletePost(token, id);
+      fetchBlogPost(token);
     } catch (err) {
       alert(err.message);
     }
@@ -87,8 +93,8 @@ useEffect(() => {
             <div className="p-3 bg-emerald-500/10 rounded-full border border-emerald-500/30 text-emerald-400">
               <Lock className="w-6 h-6" />
             </div>
-            <h2 className="text-xl font-bold text-white">Owner Admin Access</h2>
-            <p className="text-xs text-slate-400 text-center">Enter your security key to manage posts and drafts.</p>
+            <h2 className="text-xl font-bold text-white">Owner Only</h2>
+            <p className="text-xs text-slate-400 text-center">Type my favorite food.</p>
           </div>
           <form className="space-y-4">
             <Input
@@ -111,7 +117,7 @@ useEffect(() => {
       <div className="flex items-center justify-between border-b border-slate-800 pb-4">
         <div className="flex items-center gap-2">
           <ShieldCheck className="w-6 h-6 text-emerald-400" />
-          <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>
+          <h1 className="text-2xl font-bold text-white">Dashboard</h1>
         </div>
         <Button
           variant="secondary"

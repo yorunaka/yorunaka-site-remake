@@ -3,7 +3,7 @@ import PostCard from '../components/features/PostCard';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
 import { Eye, Calendar, ArrowLeft, BookOpen, Clock } from 'lucide-react';
-import { adminApi } from '../hooks/blogApi';
+import { getPost } from '../hooks/blogApi';
 
 export default function Blog() {
   const [posts, setPosts] = useState([]);
@@ -11,24 +11,28 @@ export default function Blog() {
   const [activePost, setActivePost] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // src/pages/Blog.jsx or src/components/Blog.jsx
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const data = await adminApi.getPosts();
-        setPosts(Array.isArray(data) ? data : []);
-      } catch {
-        // Handle error
-      } finally {
+    fetch('/api/posts')
+      .then((res) => res.json())
+      .then((data) => {
+        // Handles direct array OR wrapped object like { posts: [...] } or { data: [...] }
+        const postArray = Array.isArray(data) 
+          ? data 
+          : (data.posts || data.data || []);
+          
+        setPosts(postArray);
         setLoading(false);
-      }
-    };
-
-    fetchPosts();
+      })
+      .catch((err) => {
+        console.error('Error fetching blog feed:', err);
+        setLoading(false);
+      });
   }, []);
-
+  
   const openPost = (slug) => {
     setSelectedSlug(slug);
-    adminApi.getPostBySlug(slug).then((data) => {
+    getPost(slug).then((data) => {
       setActivePost(data);
     });
   };
@@ -54,7 +58,6 @@ export default function Blog() {
               <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">{activePost.title}</h1>
               <div className="flex items-center gap-6 text-xs text-slate-400">
                 <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-emerald-400" /> {new Date(activePost.createdAt || activePost.created_at).toLocaleDateString()}</span>
-                <span className="flex items-center gap-1.5"><Eye className="w-4 h-4 text-emerald-400" /> {activePost.views} Views</span>
                 <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-emerald-400" /> {Math.max(1, Math.ceil((activePost.content || '').split(' ').length / 200))} min read</span>
               </div>
             </header>
