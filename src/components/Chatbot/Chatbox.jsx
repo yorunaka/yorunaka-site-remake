@@ -80,7 +80,7 @@ const Chatbot = () => {
     };
 
   return (
-    <div className="w-full max-w-3xl h-[350px] flex flex-col overflow-hidden rounded-3xl border border-slate-200/50 bg-white/70 shadow-2xl backdrop-blur-xl lg:h-[400px]">
+    <div className="w-full max-w-3xl h-87.5 flex flex-col overflow-hidden rounded-3xl border border-slate-200/50 bg-white/70 shadow-2xl backdrop-blur-xl lg:h-100">
 
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-200/50 px-5 py-4">
@@ -195,7 +195,7 @@ const Chatbot = () => {
       {/* Input */}
       <form
         onSubmit={handleSubmit}
-        className="flex gap-2 border-t border-slate-200/50 p-4"
+        className="flex gap-2 border-none border-slate-200/50 p-4"
       >
 
         <input

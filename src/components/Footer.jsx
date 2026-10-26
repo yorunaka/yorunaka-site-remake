@@ -1,17 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { PORTFOLIO_DATA } from '../assets/portfolioData';
 
 const Footer = () => {
-  return (
-    <footer className="bg-slate-400/25">
-    <div className="">
-        <div className="flex flex-wrap pt-4 pb-3">
-            <div className="w-full self-center px-4">
-                <p className="text-center text-sm font-normal">{"© 2025 Yorunaka - All Rights Reserved"}</p>
-            </div>
-        </div>
-    </div>
-    </footer>
-  )
-}
+  const year = new Date().getFullYear();
 
-export default Footer
+  return (
+    <footer className="py-8 border-none border-slate-900 bg-slate-950 text-slate-500 text-sm text-center">
+      <div className="max-w-6xl mx-auto px-4">
+        <p>© {year} {PORTFOLIO_DATA.personal.handle} — All Rights Reserved.</p> { }
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

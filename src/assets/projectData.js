@@ -1,47 +1,71 @@
 const projects = [
   {
-    name: 'SakuyaAI',
-    type: 'Python',
-    linkToProject: 'https://github.com/yorunaka/SakuyaAI',
-    desc: 'My personal project to create a local multimodel languange chatbot using Python and StreamLit. Still WIP.',
-    linkToWebsite: ''
+    id: 'sakuya-ai',
+    name: 'SakuyaAI',  
+    category: 'AI & Machine Learning',
+    type: 'Python',  
+    featured: true,
+    tags: ['Python', 'Streamlit', 'Local LLM', 'AI Chatbot'],
+    desc: 'A personal exploration in building a local multimodal language chatbot interface powered by Python and Streamlit.',  
+    linkToProject: 'https://github.com/yorunaka/SakuyaAI',  
+    linkToWebsite: '',  
   },
   {
-    name: 'Warehouse Management',
-    type: 'Backend Engineering',
-    linkToProject: 'https://github.com/luth-fi02/uts-pbp',
-    desc: 'Me and my team was creating a Warehouse Management Website, here I worked as backend dev. This project is also created for our mid term assignment.',
-    linkToWebsite: ''
-  },  
-  {
-    name: 'SMAN 1 Weleri Web Remake',
-    type: 'Frontend Engineering',
-    linkToProject: 'https://github.com/yorunaka/sman1weleri',
-    desc: 'Here, me and my team was asked to remake a government instance website and we choose to remake SMAN 1 Weleri website. I worked as frontend dev. This is also project for late term assignment.',
-    linkToWebsite: ''
+    id: 'shizucha',
+    name: 'Shizucha Online Store',  
+    category: 'Frontend Engineering',
+    type: 'Frontend Engineering',  
+    featured: true,
+    tags: ['ReactJS', 'Tailwind CSS', 'E-Commerce', 'Cloudflare Pages'],
+    desc: 'Frontend web showcase for a modern tea startup online shop, built with responsive UI patterns and smooth state management.',  
+    linkToProject: 'https://github.com/yorunaka/react-shizucha',  
+    linkToWebsite: 'https://shizucha.pages.dev',  
   },
   {
-    name: 'Sign Extractor',
-    type: 'Image Processing',
-    linkToProject: 'https://github.com/MuhammadMiftaa/Sign-Extractor-NoLib',
-    desc: 'I was appointed to create a sign extractor project with my team. This project uses Python as for the techstack. This project is used to detect and extract someone handsign and removes its background the result would be a picture file with png format.',
-    linkToWebsite: ''
+    id: 'centralica-news',
+    name: 'Centralica News App',  
+    category: 'Frontend Engineering',
+    type: 'Frontend Engineering',  
+    featured: true,
+    tags: ['ReactJS', 'Tailwind CSS', 'DaisyUI', 'Vercel'],
+    desc: 'Capstone news application delivering real-time world news with dark theme styling, developed during Independent Study at Hacktiv8.',  
+    linkToProject: 'https://github.com/yorunaka/centralica-newsapp',  
+    linkToWebsite: 'https://capstone-news-app-vincent-louis-fernando-izqs2lxyy.vercel.app/',  
   },
   {
-    name: 'Shizucha',
-    type: 'Frontend Engineering',
-    linkToProject: 'https://github.com/yorunaka/react-shizucha',
-    desc: 'This is my front end web portfolio using ReactJS and Tailwind CSS. Shizucha is a startup that focused on bringing tea products everywhere and anywhere, here i made the front end for its online shop page.',
-    linkToWebsite: 'https://shizucha.pages.dev'
+    id: 'sign-extractor',
+    name: 'Sign Extractor',  
+    category: 'Computer Vision',
+    type: 'Image Processing',  
+    featured: false,
+    tags: ['Python', 'Image Processing', 'Computer Vision', 'No-Lib'],
+    desc: 'Handsign detection and extraction tool that processes raw image inputs, strips background context, and outputs transparent PNG assets.',  
+    linkToProject: 'https://github.com/MuhammadMiftaa/Sign-Extractor-NoLib',  
+    linkToWebsite: '',  
   },
   {
-    name: 'Centralica News App',
-    type: 'Frontend Engineering',
-    linkToProject: 'https://github.com/yorunaka/centralica-newsapp',
-    desc: 'This is my front end web portfolio using ReactJS, Tailwind CSS, and DaisyUI. This project is created as a capstone completion during my Independent Study at Hacktiv8. Centralica is a News App that delivers newest information to everyone and anywhere.',
-    linkToWebsite: 'https://capstone-news-app-vincent-louis-fernando-izqs2lxyy.vercel.app/'
+    id: 'warehouse-management',
+    name: 'Warehouse Management System',  
+    category: 'Backend Engineering',
+    type: 'Backend Engineering',  
+    featured: false,
+    tags: ['Backend', 'Database Architecture', 'API Design'],
+    desc: 'Collaborative warehouse inventory web backend handling item registration, dynamic updates, and database querying.',  
+    linkToProject: 'https://github.com/luth-fi02/uts-pbp',  
+    linkToWebsite: '',  
   },
+  {
+    id: 'sman1-weleri',
+    name: 'SMAN 1 Weleri Web Remake',  
+    category: 'Frontend Engineering',
+    type: 'Frontend Engineering',  
+    featured: false,
+    tags: ['Frontend', 'UI/UX Redesign', 'Web Development'],
+    desc: 'Complete redesign and modern frontend overhaul of an official educational institution web portal.',  
+    linkToProject: 'https://github.com/yorunaka/sman1weleri',  
+    linkToWebsite: '',  
+  },
+];
 
-]
-
+export { projects };
 export default projects;
