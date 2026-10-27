@@ -85,33 +85,6 @@ useEffect(() => {
     setEditingPost(null);
   };
 
-  if (!isAuthenticated) {
-    return (
-      <div className="h-screen bg-slate-900 py-20">
-        <div className='max-w-md mx-auto  p-6 border border-slate-800 rounded-2xl shadow-xl '>
-          <div className="flex flex-col items-center gap-3 mb-6 ">
-            <div className="p-3 bg-emerald-500/10 rounded-full border border-emerald-500/30 text-emerald-400">
-              <Lock className="w-6 h-6" />
-            </div>
-            <h2 className="text-xl font-bold text-white">Owner Only</h2>
-            <p className="text-xs text-slate-400 text-center">Type my favorite food.</p>
-          </div>
-          <form className="space-y-4">
-            <Input
-              type="password"
-              placeholder="..."
-              value={token}
-              onChange={(e) => setToken(e.target.value)}
-            />
-            <Button onClick={handleLogin} variant="primary" className="w-full">
-              Authenticate
-            </Button>
-          </form>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-6xl mx-auto py-10 px-4 space-y-8">
       <div className="flex items-center justify-between border-b border-slate-800 pb-4">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Eye, Calendar, ArrowLeft, BookOpen, Clock } from 'lucide-react';
+import { Calendar, ArrowLeft, BookOpen, Clock } from 'lucide-react';
 import { getPost } from '../hooks/blogApi';
 
 
@@ -15,9 +15,6 @@ function SingleFilePostCard({ post, onClick }) {
           <span className="flex items-center gap-1.5">
             <Calendar className="w-3.5 h-3.5" />
             {new Date(post.createdAt || post.created_at).toLocaleDateString()}
-          </span>
-          <span className="flex items-center gap-1 text-slate-400">
-            <Eye className="w-3.5 h-3.5 text-emerald-400" /> {post.views || 0}
           </span>
         </div>
 
@@ -126,10 +123,6 @@ export default function Blog() {
                     {Math.max(1, Math.ceil((activePost.content || '').split(' ').length / 200))} min read
                   </span>
                   <span>•</span>
-                  <span className="flex items-center gap-1.5">
-                    <Eye className="w-4 h-4 text-emerald-400" />
-                    {activePost.views || 0} views
-                  </span>
                 </div>
               </header>
 
@@ -154,7 +147,7 @@ export default function Blog() {
                     ),
                     // Elegant paragraph spacing
                     p: ({ node, children }) => (
-                      <p className="leading-8 text-slate-300 text-base sm:text-lg mb-6">
+                      <p className="leading-8 text-slate-300 text-justify sm:text-lg mb-6">
                         {children}
                       </p>
                     ),
