@@ -24,21 +24,29 @@ export const getPost = async (token = null) => {
   return Array.isArray(data) ? data : (data.posts || data.data || []);
 };
 
+// src/hooks/blogApi.jsx
 export const savePost = async (token, postData, status) => {
-  const isUpdate = Boolean(postData.id);
+  const isUpdate = Boolean(postData.id && postData.id !== '');
   const method = isUpdate ? 'PUT' : 'POST';
+
+  const payload = { ...postData, status };
+  if (!isUpdate) {
+    delete payload.id; // Strip empty/null id for new post creations
+  }
 
   const res = await fetch(BASE_URL, {
     method,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify({ ...postData, status })
+    body: JSON.stringify(payload)
   });
 
   if (!res.ok) {
-    throw new Error('Failed to save post');
+    const errData = await res.json().catch(() => ({}));
+    console.error('Server save error details:', errData);
+    throw new Error(errData.error || 'Failed to save post');
   }
 
   return await res.json();
@@ -49,7 +57,7 @@ export const deletePost = async (token, id) => {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      'Authorization': `Bearer ${token}`
     },
     body: JSON.stringify({ id })
   });

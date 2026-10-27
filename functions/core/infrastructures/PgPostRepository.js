@@ -38,12 +38,13 @@ export class PgPostRepository extends IPostRepository {
     const client = getPostgresClient(this.env);
     await client.connect();
     try {
-      const query = `
-        INSERT INTO posts (id, title, slug, content, excerpt, status)
-        VALUES ($1, $2, $3, $4, $5, $6)
+      const queryStr = `
+        INSERT INTO posts (title, slug, content, excerpt, status)
+        VALUES ($1, $2, $3, $4, $5)
         RETURNING *`;
-      const values = [post.id, post.title, post.slug, post.content, post.excerpt, post.status];
-      const res = await client.query(query, values);
+      
+      const values = [post.title, post.slug, post.content, post.excerpt, post.status];
+      const res = await client.query(queryStr, values);
       return new PostEntity(res.rows[0]);
     } finally {
       await client.end();
@@ -54,13 +55,14 @@ export class PgPostRepository extends IPostRepository {
     const client = getPostgresClient(this.env);
     await client.connect();
     try {
-      const query = `
+      const queryStr = `
         UPDATE posts
         SET title = $1, slug = $2, content = $3, excerpt = $4, status = $5, updated_at = CURRENT_TIMESTAMP
         WHERE id = $6
         RETURNING *`;
-      const values = [post.title, post.slug, post.content, post.excerpt, post.status, post.id];
-      const res = await client.query(query, values);
+        
+      const values = [post.title, post.slug, post.content, post.excerpt, post.status, Number(post.id)];
+      const res = await client.query(queryStr, values);
       return new PostEntity(res.rows[0]);
     } finally {
       await client.end();
@@ -71,7 +73,7 @@ export class PgPostRepository extends IPostRepository {
     const client = getPostgresClient(this.env);
     await client.connect();
     try {
-      await client.query('DELETE FROM posts WHERE id = $1', [id]);
+      await client.query('DELETE FROM posts WHERE id = $1', [Number(id)]);
       return true;
     } finally {
       await client.end();

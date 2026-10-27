@@ -99,7 +99,7 @@ useEffect(() => {
           <form className="space-y-4">
             <Input
               type="password"
-              placeholder="Enter ADMIN_SECRET_KEY"
+              placeholder="..."
               value={token}
               onChange={(e) => setToken(e.target.value)}
             />

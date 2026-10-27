@@ -1,16 +1,17 @@
 // src/core/domain/Entities.js
   export class PostEntity {
     constructor({ id, title, slug, content, excerpt, status, created_at, createdAt }) {
-      this.id = id;
-      this.title = title;
-      this.slug = slug;
-      this.content = content || '';
-      this.excerpt = excerpt || '';
-      this.status = status;
-      // Ensure both camelCase and snake_case inputs resolve correctly:
-      this.createdAt = createdAt || created_at || new Date().toISOString();
-    }
-  
+        // Only assign id if provided (e.g., from database read); leave undefined for new records
+        this.id = id ? Number(id) : undefined;
+        this.title = title?.trim();
+        this.slug = slug || this.generateSlug(this.title);
+        this.content = content || '';
+        this.excerpt = excerpt || '';
+        this.status = status === 'published' ? 'published' : 'draft';
+        this.createdAt = createdAt || created_at || new Date().toISOString();
+
+        this.validate();
+      }
 
   generateSlug(title) {
     if (!title) return '';

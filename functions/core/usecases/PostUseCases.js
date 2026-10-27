@@ -34,7 +34,15 @@ export class SavePostUseCase {
   }
 
   async execute(postData, isUpdate = false) {
-    const postEntity = new PostEntity(postData);
+    const cleanData = { ...postData };
+
+    // If creating a new post, remove empty/null id so PostEntity generates a UUID
+    if (!isUpdate || !cleanData.id) {
+      delete cleanData.id;
+    }
+
+    const postEntity = new PostEntity(cleanData);
+
     if (isUpdate) {
       if (!postData.id) throw new Error("Post ID is required for updates");
       return await this.postRepo.update(postEntity);
