@@ -1,4 +1,4 @@
-import { verifyAdmin } from './_middleware/middleware.js';
+import { verifyAdmin } from './middleware/middleware.js';
 import { PgPostRepository } from '../core/infrastructures/PgPostRepository.js';
 import {
   ListPostsUseCase,

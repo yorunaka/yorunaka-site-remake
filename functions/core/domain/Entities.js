@@ -10,7 +10,7 @@
       // Ensure both camelCase and snake_case inputs resolve correctly:
       this.createdAt = createdAt || created_at || new Date().toISOString();
     }
-  }
+  
 
   generateSlug(title) {
     if (!title) return '';

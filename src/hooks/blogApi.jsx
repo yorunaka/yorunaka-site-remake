@@ -1,8 +1,8 @@
 // Use relative pathing so it works in both local dev and Cloudflare deployment
 const BASE_URL = '/api/posts';
 
-const getPost = async (token = null) => {
-const headers = { 'Content-Type': 'application/json' };
+export const getPost = async (token = null) => {
+  const headers = { 'Content-Type': 'application/json' };
 
   // ONLY add Authorization if token is a valid non-empty string
   if (token && token !== 'undefined' && token !== 'null') {
@@ -10,7 +10,9 @@ const headers = { 'Content-Type': 'application/json' };
   }
 
   // If token is provided, append admin=true to list drafts as well
-  const url = token ? `${BASE_URL}?admin=true` : BASE_URL;
+  // Append admin parameter only when authenticated as admin
+  const isTokenValid = Boolean(token && token !== 'undefined' && token !== 'null');
+  const url = isTokenValid ? `${BASE_URL}?admin=true` : BASE_URL;
 
   const res = await fetch(url, { headers });
 
@@ -19,10 +21,10 @@ const headers = { 'Content-Type': 'application/json' };
   }
 
   const data = await res.json();
-  return Array.isArray(data) ? data : [];
+  return Array.isArray(data) ? data : (data.posts || data.data || []);
 };
 
-const savePost = async (token, postData, status) => {
+export const savePost = async (token, postData, status) => {
   const isUpdate = Boolean(postData.id);
   const method = isUpdate ? 'PUT' : 'POST';
 
@@ -42,7 +44,7 @@ const savePost = async (token, postData, status) => {
   return await res.json();
 };
 
-const deletePost = async (token, id) => {
+export const deletePost = async (token, id) => {
   const res = await fetch(BASE_URL, {
     method: 'DELETE',
     headers: {
@@ -59,8 +61,3 @@ const deletePost = async (token, id) => {
   return await res.json();
 };
 
-export default {
-  getPost,
-  savePost,
-  deletePost
-};
